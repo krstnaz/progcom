@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of message</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign out"/>
+    </form>
+
+    <tr th:each="role : ${user.roles}">
+        <div th:if="${role.toString()} == ADMIN">
+            <a href="/user">АДМИНКА</a>
+        </div>
+    </tr>
+
+    <div>Список сообщений</div>
+    <p>Для добавления сообщения нажмите <a href="/message/add">здесь</a></p>
+
+    <form th:action="@{filter}" method="post">
+        <input type="text" name="filter">
+        <button type="submit">Найти</button>
+    </form>
+
+    <a href="list">Показать все</a>
+
+    <th:block th:if="${#lists.isEmpty(messages)}">List of messages is empty</th:block>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>TEXT</th>
+            <th>LINK</th>
+            <th>TAG</th>
+            <th>AUTHOR</th>
+        </tr>
+
+        <tr th:each="message : ${messages}">
+            <td><span th:text="${message.id}"> Id </span></td>
+            <td><span th:text="${message.text}"> Text </span></td>
+            <td><span th:text="${message.link}"> Link </span></td>
+            <td><span th:text="${message.tag}"> Tag </span></td>
+            <td><strong th:text="${message.getAuthorName()}">Author</strong></td>
+        </tr>
+
+    </table>
+
+</body>
+</html>

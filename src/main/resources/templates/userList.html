@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of users</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+List of users
+<table>
+    <thead>
+    <tr>
+        <th>NAME</th>
+        <th>ROLE</th>
+        <th>PASSWORD</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td><span th:text="${user.getUsername()}"> Name </span></td>
+
+<!--        <td><span th:text="${user.getRoles()}"> Role </span></td>-->
+        <td><span th:text="${#strings.setJoin(user.roles, ',')}"> Role </span></td>
+
+        <td><span th:text="${user.getPassword()}"> Password </span></td>
+
+<!--        <td><a th:href="@{/user/details(id=${user.id})}">Edit</a></td>-->
+        <td><a th:href="@{'/user/'+${user.id}}">Edit</a></td>
+    </tr>
+    </tbody>
+
+
+
+</table>
+
+</body>
+</html>

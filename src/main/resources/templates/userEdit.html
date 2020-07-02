@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User edit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+User edit
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign out"/>
+</form>
+
+<form th:action="@{/user}" method="post">
+    <input type="text" name="username" th:value="${user.getUsername()}">
+
+    <div th:each="role : ${roles}">
+        <div th:each="userRole : ${user.getRoles()}">
+            <label> <input type="checkbox" th:name="${role}" th:checked="${role} == ${userRole}"> <span th:text="${role}"></span></label>
+        </div>
+    </div>
+
+    <input type="hidden" name="userId" th:value="${user.id}">
+    <button th:type="submit">Save</button>
+</form>
+
+</body>
+</html>
